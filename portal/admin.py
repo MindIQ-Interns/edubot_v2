@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from quizbot.models import *
+
+
+models = [BotUser, Subject, Topic, Question, Option, Quiz, AttemptedPaper, Answer, StudentQuizReview]
+
+for model in models:
+    admin.site.register(model)
