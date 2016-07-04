@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'messengerplugin',
     'portal',
     'quizbot',
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'edubot_v2.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config('postgres://njay:Zephyrs123@localhost:5432/edubot_db')
+    'default': dj_database_url.config(default='postgres://njay:Zephyrs123@localhost:5432/edubot_db')
 }
 
 
