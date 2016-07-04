@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os, dj_database_url
 
+# A gitignored file containing sensitive information.
 from . import secrets
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'edubot_v2.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://njay:Zephyrs123@localhost:5432/edubot_db')
+    'default': dj_database_url.config(default='postgres://njay:Zephyrs123@localhost:5432/{0}'.format(secrets.DATABASE_NAME))
 }
 
 
