@@ -7,7 +7,7 @@ class BotUser(models.Model):
     username = models.CharField(max_length=100)
     dob = models.DateTimeField()
     gender = models.CharField(max_length=1)
-    fb_id = models.CharField(max_length=150)
+    platform_id = models.CharField(max_length=150)
     on_portal = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
