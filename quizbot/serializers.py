@@ -20,3 +20,9 @@ class TopicSerializer(ModelSerializer):
 
     class Meta:
         model = Topic
+
+
+class QuestionSerializer(ModelSerializer):
+
+    class Meta:
+        model = Question
