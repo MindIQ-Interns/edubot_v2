@@ -4,7 +4,7 @@ from django.db import models
 class BotUser(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    username = models.CharField(max_length=100)
+    username = models.CharField(max_length=100, unique=True)
     dob = models.DateTimeField()
     gender = models.CharField(max_length=1)
     platform_id = models.CharField(max_length=150)
@@ -15,7 +15,7 @@ class BotUser(models.Model):
 
 
 class Subject(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
@@ -23,7 +23,7 @@ class Subject(models.Model):
 
 class Topic(models.Model):
     name = models.CharField(max_length=100)
-    subject = models.ForeignKey(Subject)
+    subject = models.ForeignKey(Subject, related_name='topics')
 
     def __str__(self):
         return self.name
@@ -42,7 +42,7 @@ class Question(models.Model):
 class Option(models.Model):
     text = models.TextField()
     is_correct = models.BooleanField(default=False)
-    question = models.ForeignKey(Question)
+    question = models.ForeignKey(Question, related_name='options')
 
     def __str__(self):
         return self.text
@@ -79,7 +79,7 @@ class AttemptedPaper(models.Model):
 
 class Answer(models.Model):
     index = models.IntegerField()
-    paper = models.ForeignKey(AttemptedPaper)
+    paper = models.ForeignKey(AttemptedPaper, related_name='answers')
     option = models.ForeignKey(Option)
 
     def __str__(self):
