@@ -2,13 +2,13 @@ from django.db import models
 
 
 class BotUser(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    username = models.CharField(max_length=100, unique=True)
-    dob = models.DateTimeField()
-    gender = models.CharField(max_length=1)
+    first_name = models.CharField(max_length=100, default=None)
+    last_name = models.CharField(max_length=100, default=None)
+    username = models.CharField(max_length=100, unique=True, default=None)
+    dob = models.DateTimeField(default=None)
+    gender = models.CharField(max_length=1, default=None)
     platform_id = models.CharField(max_length=150)
-    on_portal = models.IntegerField(null=True, blank=True)
+    on_portal = models.IntegerField(default=None, null=True, blank=True)
 
     def __str__(self):
         return self.username
