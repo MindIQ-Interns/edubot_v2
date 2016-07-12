@@ -18,4 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^messenger/', include('messengerplugin.urls'))
+    url(r'^portal/', include('portal.urls'))
 ]
