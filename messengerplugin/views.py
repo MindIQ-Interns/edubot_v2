@@ -47,6 +47,21 @@ def generic_template(recipient_id, title, subtitle, choices):
     })
 
 
+def raw_message(sender_id, text):
+    return json.dumps({
+        'sender_id': sender_id,
+        'type': 'raw',
+        'text': text
+    })
+
+
+def postback_message(sender_id, text):
+    return json.dumps({
+        'sender_id': sender_id,
+        'type': 'postback',
+        'text': text
+    })
+
 
 class BotInterface(View):
 
@@ -91,9 +106,9 @@ class MessengerInterface(View):
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
                 if 'message' in message:
-                    pprint(message)
+                    pprint(raw_message(sender_id=message['sender']['id'], text=message['message']['text']))
 
                 elif 'postback' in message:
-                    pprint(message)
+                    pprint(postback_message(sender_id=message['sender']['id'], text=message['postback']['payload']))
 
         return HttpResponse()
