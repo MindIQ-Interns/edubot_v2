@@ -56,7 +56,7 @@ class BotInterface(View):
         if incoming_message['type'] == 'text':
             status = requests.post(
                 url=secrets.POST_MESSAGE_URL,
-                headers={'Content-type: application/json',},
+                headers={'Content-type: application/json'},
                 data=text_message(recipient_id=incoming_message['recipient_id'], text=incoming_message['text'])
             )
             pprint(status.json())

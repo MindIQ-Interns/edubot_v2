@@ -21,13 +21,13 @@ def text_message(recipient_id, text):
     }
 
 
-def choice_message(recipient_id, question='', details='', choices=[], is_more=False):          # choices, a list of 2-tuples, where first value is the postback of the button, the second is the text on the button
+def choice_message(recipient_id, question='', details='', choices=None, is_more=False):          # choices, a list of 2-tuples, where first value is the postback of the button, the second is the text on the button
     return {
         'recipient_id': recipient_id,
         'type': 'choice',
         'question': question,
         'details': details,
-        'choices': choices,
+        'choices': choices if choices is not None else [],
         'is_more': is_more,
     }
 
@@ -57,7 +57,7 @@ class QuizBotMixin:
     def set_client(self, fb_id):
         try:
             self.client_data = BotUser.objects.get(platform_id=fb_id)
-            self.mode = 'home'
+            self.mode = 'choose_quiz'
 
         except BotUser.DoesNotExist:
             self.client_data = BotUser()
@@ -284,3 +284,13 @@ class QuizBotMixin:
                 self.subject = self.topic = self.quiz = self.question_number = None
                 self.mode = 'choose_quiz'
                 self.check_quiz_data(received_message['sender_id'])
+
+    def respond(self, received_message):
+        if self.mode == 'register':
+            self.register(received_message)
+
+        elif self.mode == 'choose_quiz':
+            self.choose_quiz(received_message)
+
+        elif self.mode == 'send_quiz':
+            self.conduct_quiz(received_message)
