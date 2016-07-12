@@ -14,7 +14,7 @@ class BotView(View, QuizBotMixin):
             self.client_data
 
         except AttributeError:
-            self.set_client(request.META['HTTP_FB_ID'])
+            self.set_client(request.META['HTTP_SENDER_ID'])
 
         super(BotView, self).dispatch(request, *args, **kwargs)
 

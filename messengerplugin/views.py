@@ -106,9 +106,19 @@ class MessengerInterface(View):
         for entry in incoming_message['entry']:
             for message in entry['messaging']:
                 if 'message' in message:
-                    pprint(raw_message(sender_id=message['sender']['id'], text=message['message']['text']))
+                    status = requests.post(
+                        url='http://localhost:8000/bot/2jf83bf9b3bg03nf83383nfnebcmsifbrkr0v84b222hfjebfi/',
+                        headers={'Content-type': 'application/json', 'sender_id': message['sender']['id']},
+                        data=raw_message(sender_id=message['sender']['id'], text=message['message']['text'])
+                    )
+                    pprint(status.json())
 
                 elif 'postback' in message:
-                    pprint(postback_message(sender_id=message['sender']['id'], text=message['postback']['payload']))
+                    status = requests.post(
+                        url='http://localhost:8000/bot/2jf83bf9b3bg03nf83383nfnebcmsifbrkr0v84b222hfjebfi/',
+                        headers={'Content-type': 'application/json', 'sender_id': message['sender']['id']},
+                        data=postback_message(sender_id=message['sender']['id'], text=message['postback']['payload'])
+                    )
+                    pprint(status.json())
 
         return HttpResponse()

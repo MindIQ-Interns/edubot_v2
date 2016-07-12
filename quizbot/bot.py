@@ -1,3 +1,4 @@
+import requests
 from pprint import pprint
 from datetime import date
 
@@ -34,7 +35,11 @@ def choice_message(recipient_id, question='', details='', choices=None, is_more=
 
 def send(reply):
     for message in reply:
-        pprint(message)
+        status = requests.post(
+            url='http://localhost:8000/messenger/32h3jk543kl4h32k4v3b44h5jbm33354s234i32ae3454543pl',
+            headers={'Content-type': 'application/json'},
+            data=message
+        )
 
 
 def send_error_message(recipient_id, text):
